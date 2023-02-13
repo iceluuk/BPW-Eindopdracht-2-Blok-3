@@ -44,40 +44,17 @@ public class GunController : MonoBehaviour
 
         while (hit.collider != null && reflections < maxReflections)
         {
-            laserPositions.Add(hit.point);
-            Vector2 reflectionDirection = Vector2.Reflect(hit.point - laserStart, hit.normal);
-            laserStart = hit.point;
-            hit = Physics2D.Raycast(hit.point, reflectionDirection);
-            reflections++;
-        }
-
-        if (hit.collider == null)
-        {
-            Vector3 laserEnd = laserStartPoint.transform.position + (transform.right * 100);
-            laserPositions.Add(laserEnd);
-        }
-        lineRenderer.positionCount = laserPositions.Count;
-        lineRenderer.SetPositions(laserPositions.ToArray());
-        reflections = 0;
-    }
-
-    void Shoot(){
-        //Shoot lazer stuff
-        Vector2 laserStart = laserStartPoint.transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(laserStart, transform.right);
-        int reflections = 0;
-        List<Vector3> laserPositions = new List<Vector3>();
-        laserPositions.Add(laserStartPoint.transform.position);
-        Debug.Log("Hit normal: " + hit.normal);
-
-        while (reflections < maxReflections)
-        {
+            Debug.DrawLine(laserStart, hit.point, Color.red);
             Debug.Log("Reflect made: " + reflections);
+
             laserPositions.Add(hit.point);
             Vector2 reflectionDirection = Vector2.Reflect(hit.point - laserStart, hit.normal);
             laserStart = hit.point;
-            hit = Physics2D.Raycast(hit.point, reflectionDirection);
+            hit = Physics2D.Raycast(hit.point + hit.normal * new Vector2(0.1f, 0.1f), reflectionDirection);
             reflections++;
+
+            /*Breakable breakable = hit.collider.gameObject.GetComponent<Breakable>();
+            breakable.damage();*/
         }
 
         if (hit.collider == null)
@@ -86,6 +63,6 @@ public class GunController : MonoBehaviour
             laserPositions.Add(laserEnd);
         }
         lineRenderer.positionCount = laserPositions.Count;
-        lineRenderer.SetPositions(laserPositions.ToArray());
+        lineRenderer.SetPositions(laserPositions.ToArray());;
     }
 }
