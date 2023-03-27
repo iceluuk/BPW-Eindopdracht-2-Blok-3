@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - LazerColider
+  - LazerCollider
   layers:
   - Default
   - TransparentFX
@@ -13,7 +13,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - LazerCollider
   - 
   - 
   - 

@@ -42,9 +42,12 @@ public class GunController : MonoBehaviour
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 
+        
         //Shoot lazer stuff
+        LayerMask mask = LayerMask.GetMask("Default");
+
         Vector2 laserStart = laserStartPoint.transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(laserStart, transform.right);
+        RaycastHit2D hit = Physics2D.Raycast(laserStart, transform.right, Mathf.Infinity, mask);
         int reflections = 0;
         List<Vector3> laserPositions = new List<Vector3>();
         laserPositions.Add(laserStartPoint.transform.position);
@@ -61,7 +64,7 @@ public class GunController : MonoBehaviour
             laserPositions.Add(hit.point);
             Vector2 reflectionDirection = Vector2.Reflect(hit.point - laserStart, hit.normal);
             laserStart = hit.point;
-            hit = Physics2D.Raycast(hit.point + hit.normal * new Vector2(0.1f, 0.1f), reflectionDirection);
+            hit = Physics2D.Raycast(hit.point + hit.normal * new Vector2(0.1f, 0.1f), reflectionDirection, Mathf.Infinity, mask);
 
             reflections++;
         }
