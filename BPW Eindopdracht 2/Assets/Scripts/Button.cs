@@ -7,6 +7,8 @@ public class Button : MonoBehaviour
 {
     public UnityEvent Activate;
     public UnityEvent Deactivate;
+    public Sprite activeSprite;
+    public Sprite inactiveSprite;
     SpriteRenderer spriteRenderer;
     float lastLazered;
 
@@ -33,10 +35,10 @@ public class Button : MonoBehaviour
     }
 
     void Active(){
-        spriteRenderer.color = Color.red;
+        spriteRenderer.sprite = activeSprite;
     }
 
     void Deactive(){
-        spriteRenderer.color = Color.gray;
+        spriteRenderer.sprite = inactiveSprite;
     }
 }

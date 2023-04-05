@@ -42,7 +42,7 @@ public class GunController : MonoBehaviour
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 
-        
+        if(Input.GetMouseButton(0)){
         //Shoot lazer stuff
         LayerMask mask = LayerMask.GetMask("Default");
 
@@ -76,6 +76,17 @@ public class GunController : MonoBehaviour
         Debug.Log("Reflect made: " + reflections);
         laserPositions.Add(hit.point);
         lineRenderer.positionCount = laserPositions.Count;
-        lineRenderer.SetPositions(laserPositions.ToArray());;
+        lineRenderer.SetPositions(laserPositions.ToArray());
+        lineRenderer.enabled = true;
+        }else
+        {
+            foreach (GameObject hitbox in hitboxes)
+            {
+                hitbox.transform.position = new Vector3(200, 200, 200);
+            }
+            lineRenderer.enabled = false;
+            
+        }
     }
 }
+
