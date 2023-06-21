@@ -106,6 +106,7 @@ MonoBehaviour:
       m_Calls: []
   activeSprite: {fileID: 21300000, guid: 17cfaf52d0788e043a4d7d8a8a5cd8d0, type: 3}
   inactiveSprite: {fileID: 21300000, guid: 9c826978682798441b9fac632e090b84, type: 3}
+  timeUntilDeactivate: 0.2
 --- !u!61 &5510804664132247507
 BoxCollider2D:
   m_ObjectHideFlags: 0

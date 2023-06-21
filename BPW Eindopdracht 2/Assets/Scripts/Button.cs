@@ -10,7 +10,8 @@ public class Button : MonoBehaviour
     public Sprite activeSprite;
     public Sprite inactiveSprite;
     SpriteRenderer spriteRenderer;
-    float lastLazered;
+    Coroutine deactivateCoroutine;
+    public float timeUntilDeactivate = 0.1f;
 
     void Start(){
         Activate.AddListener(Active);
@@ -26,8 +27,10 @@ public class Button : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other) {
         Debug.Log("stopped colliding with " + other.name);
-        Deactivate?.Invoke();
-
+        if (deactivateCoroutine != null) {
+            StopCoroutine(deactivateCoroutine);
+        }
+        deactivateCoroutine = StartCoroutine(DeactivateWithDelay());
     }
 
     private void OnTriggerStay2D(Collider2D other) {
@@ -41,4 +44,10 @@ public class Button : MonoBehaviour
     void Deactive(){
         spriteRenderer.sprite = inactiveSprite;
     }
+
+    IEnumerator DeactivateWithDelay() {
+        yield return new WaitForSeconds(timeUntilDeactivate);
+        Deactivate?.Invoke();
+    }
 }
+
