@@ -12,6 +12,7 @@ public class Button : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Coroutine deactivateCoroutine;
     public float timeUntilDeactivate = 0.1f;
+    public bool playerTrigger = false;
 
     void Start(){
         Activate.AddListener(Active);
@@ -22,7 +23,14 @@ public class Button : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         Debug.Log("collided with " + other.name);
-        Activate?.Invoke();
+        if(playerTrigger == true){
+            if(other.gameObject.tag == "Player"){
+                Activate?.Invoke();
+            }
+        }
+        else{
+            Activate?.Invoke();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
@@ -34,7 +42,14 @@ public class Button : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        Activate?.Invoke();
+        if(playerTrigger == true){
+            if(other.gameObject.tag == "Player"){
+                Activate?.Invoke();
+            }
+        }
+        else{
+            Activate?.Invoke();
+        }
     }
 
     void Active(){

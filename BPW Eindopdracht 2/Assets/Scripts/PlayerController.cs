@@ -59,4 +59,8 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
+
+    public void TeleportY(float y){
+        transform.position += new Vector3(0,y,0);
+    }
 }
