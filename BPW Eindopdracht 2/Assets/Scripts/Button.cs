@@ -22,7 +22,7 @@ public class Button : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("collided with " + other.name);
+        //activeer event
         if(playerTrigger == true){
             if(other.gameObject.tag == "Player"){
                 Activate?.Invoke();
@@ -33,8 +33,8 @@ public class Button : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
-        Debug.Log("stopped colliding with " + other.name);
+    private void OnTriggerExit2D(Collider2D other) {  
+        //deactiveer event      
         if (deactivateCoroutine != null) {
             StopCoroutine(deactivateCoroutine);
         }
@@ -42,6 +42,7 @@ public class Button : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D other) {
+        //activeer event
         if(playerTrigger == true){
             if(other.gameObject.tag == "Player"){
                 Activate?.Invoke();

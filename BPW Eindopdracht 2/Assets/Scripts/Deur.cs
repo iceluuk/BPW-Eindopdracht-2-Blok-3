@@ -12,14 +12,13 @@ public class Deur : MonoBehaviour
 
     private void Start()
     {
-        // Get a reference to the door's collider and sprite renderer
         doorCollider = GetComponent<Collider2D>();
         doorSprite = GetComponent<SpriteRenderer>();
     }
 
     public void Open()
     {
-        // Disable the collider and set the sprite's alpha to 0 (transparent)
+        //zet collision uit, veranderd sprite color en alpha
         doorCollider.enabled = false;
         Color spriteColor = doorSprite.color;
         spriteColor.a = alpha;
@@ -30,7 +29,7 @@ public class Deur : MonoBehaviour
 
     public void Close()
     {
-        // Enable the collider and set the sprite's alpha to 1 (opaque)
+        //zet collision aan, veranderd sprite color en alpha
         doorCollider.enabled = true;
         Color spriteColor = doorSprite.color;
         spriteColor.a = 1f;

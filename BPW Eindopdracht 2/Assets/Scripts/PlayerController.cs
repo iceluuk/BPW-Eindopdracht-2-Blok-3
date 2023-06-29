@@ -9,26 +9,26 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigidBody2D;
     private bool isGrounded = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //Haalt de WASD input op
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
         rigidBody2D.velocity = new Vector2(horizontal * speed, rigidBody2D.velocity.y);
 
+        //als W ingedrukt en krakter staat op de grond, Spring omhoog
         if (vertical > 0 && isGrounded)
         {
-            // check if the player is colliding with the ground from the top
-            ContactPoint2D[] contacts = new ContactPoint2D[10]; // allocate more than one contact point
+            ContactPoint2D[] contacts = new ContactPoint2D[10];
             int numContacts = rigidBody2D.GetContacts(contacts);
             bool canJump = false;
+            //checked voor elke contact point of het onder het karakter is.
             for (int i = 0; i < numContacts; i++)
             {
                 if (contacts[i].normal == Vector2.up)
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Fuction word gebruikt voor Loopholes
     public void TeleportY(float y){
         transform.position += new Vector3(0,y,0);
     }

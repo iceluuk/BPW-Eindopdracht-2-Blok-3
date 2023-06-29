@@ -57,9 +57,6 @@ public class GunController : MonoBehaviour
         GameObject currentHitbox;
         while (reflections < maxReflections)
         {
-            Debug.DrawLine(laserStart, hit.point, Color.black);
-            Debug.Log("Reflect made: " + reflections);
-
             currentHitbox = hitboxes[reflections];
             currentHitbox.transform.position = hit.point;
 

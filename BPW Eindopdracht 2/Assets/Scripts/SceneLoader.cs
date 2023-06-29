@@ -5,7 +5,7 @@ public class SceneLoader : MonoBehaviour
 {
     void Update()
     {
-        // Als er op de "R"-toets wordt gedrukt, roep resetScene-functie aan
+        // Als er op de R wordt gedrukt, resetScene
         if (Input.GetKeyDown(KeyCode.R))
         {
             ResetScene();
