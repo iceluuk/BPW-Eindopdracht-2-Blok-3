@@ -9,17 +9,14 @@ public class GunController : MonoBehaviour
     public int maxReflections = 2;
     public GameObject hitboxPrefab;
     public GameObject laserStartPoint;
-    public GameObject hitParticlePrefab;
+    public Texture2D aimCursor;
 
     private Transform playerTransform;
     private LineRenderer lineRenderer;
     private RaycastHit2D hit;
-    private ParticleSystem hitParticle;
-
 
     private GameObject[] hitboxes;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerTransform = transform.parent;
@@ -30,9 +27,10 @@ public class GunController : MonoBehaviour
         for(int i = 0; i < hitboxes.Length; i++){
             hitboxes[i] = Instantiate(hitboxPrefab);
         }
+
+        Cursor.SetCursor(aimCursor, new Vector2(16,16), CursorMode.ForceSoftware);
     }
 
-    // Update is called once per frame
     void Update()
     {
         //Aim gun
@@ -82,15 +80,6 @@ public class GunController : MonoBehaviour
         lineRenderer.positionCount = laserPositions.Count;
         lineRenderer.SetPositions(laserPositions.ToArray());
         lineRenderer.enabled = true;
-
-        if (hit.collider.CompareTag("Player"))
-        {
-            if (hitParticle == null || !hitParticle.isPlaying)
-            {
-                hitParticle = Instantiate(hitParticlePrefab, hit.point, Quaternion.identity).GetComponent<ParticleSystem>();
-                hitParticle.transform.LookAt(playerTransform);
-            }
-        }
 
         }else
         {
